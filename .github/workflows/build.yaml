@@ -27,10 +27,10 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            hhmbroekman/student-app:latest
+            sibunanick/student-app:latest
   test:
     name: Test
-    needs: [ scan ]
+    needs: [ build ]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
@@ -43,7 +43,7 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
       - name: test 
         run: |
-          docker run -d -p 80:5000 hhmbroekman/student-app:latest
+          docker run -d -p 80:5000 sibunanick/student-app:latest
           sleep 10s
           curl http://localhost
           docker ps -aq | xargs docker stop | xargs docker rm
