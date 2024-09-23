@@ -17,7 +17,7 @@ jobs:
         uses: docker/scout-action@v1.5.0
         with:
           command: cves
-          image: student-app:latest
+          image: sibunanick/student-app:latest
           only-severities: critical,high
           github-token: ${{ secrets.GITHUB_TOKEN }}
           exit-on: vulnerability
