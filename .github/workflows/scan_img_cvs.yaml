@@ -18,6 +18,7 @@ only-severities: critical,high
 ignore-base: false
 ignore-unchanged: false
 write-comment: true
+ignore-cves: CVE-2023-XXXX,CVE-2023-YYYY
 github-token: ${{ secrets. GITHUB_TOKEN }} 
 exit-code: true
 exit-on: vulnerability
