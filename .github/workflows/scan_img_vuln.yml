@@ -1,5 +1,6 @@
 name: Scan Image for Vulnerabilities
 on: [push]
+
 jobs:
   scan:
     runs-on: ubuntu-latest
@@ -19,5 +20,9 @@ jobs:
           command: cves
           image: sibunanick/student-app:latest
           only-severities: critical,high
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          exit-on: vulnerability
+          ignore-base: false
+          ignore-unchanged: false
+          write-comment: true
+          github-token: ${{ secrets.GITHUB_TOKEN }} # Remove the extra space
+          exit-code: true  # This makes the pipeline fail on high vulnerabilities
+          exit-on: vulnerability  # Stop the pipeline on any high/critical vulnerability
