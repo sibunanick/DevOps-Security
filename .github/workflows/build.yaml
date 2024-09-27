@@ -29,6 +29,32 @@ jobs:
           push: true
           tags: |
             sibunanick/student-app:latest
+
+  scan:
+    runs-on: ubuntu-latest
+    needs: [ build ]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_LOGIN }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+      - name: Docker Scout CVEs
+        uses: docker/scout-action@v1.5.0
+        with:
+          command: cves
+          image: sibunanick/student-app:latest
+          only-severities: critical,high
+          ignore-base: false
+          ignore-unchanged: false
+          write-comment: true
+          github-token: ${{ secrets.GITHUB_TOKEN }} # Remove the extra space
+          exit-code: true  # This makes the pipeline fail on high vulnerabilities
+          exit-on: vulnerability  # Stop the pipeline on any high/critical vulnerability
+          
   test:
     name: Test
     needs: [ build ]
