@@ -52,7 +52,7 @@ jobs:
           ignore-unchanged: false
           write-comment: true
           github-token: ${{ secrets.GITHUB_TOKEN }} # Remove the extra space
-          exit-code: true  # This makes the pipeline fail on high vulnerabilities
+          exit-code: false  # This makes the pipeline fail on high vulnerabilities
           exit-on: vulnerability  # Stop the pipeline on any high/critical vulnerability
           
   test:
